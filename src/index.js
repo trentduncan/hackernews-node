@@ -1,26 +1,18 @@
 'use strict';
 
 const { GraphQLServer } = require('graphql-yoga');
-const { Prisma } = require('prisma-binding')
+const { Prisma } = require('prisma-binding');
+const Query = require('./resolvers/Query')
+const Mutation = require('./resolvers/Mutation')
+const AuthPayload = require('./resolvers/AuthPayload')
 
 // 2
 const resolvers = {
-  Query: {
-    info: () => 'This is the API of a Hackernews clone woohoo',
-    feed: (root, args, context, info) => {
-      return context.db.query.links({}, info);
-    },
+  Query,
     // getById: (roots, args, context, info) => links.find(item => item.id === args.id)
-  },
-  Mutation: {
-    post: (root, args, context, info) => {
-      return context.db.mutation.createLink({
-        data: {
-          url: args.url,
-          description: args.description,
-        },
-      }, info);
-    },
+  
+  Mutation,
+  AuthPayload
     // updateLink: (roots, args) => {
     //   let result = 'Not valid id';
     //   links.forEach(item => {
@@ -35,8 +27,9 @@ const resolvers = {
     // deleteLink: (roots, args) => {
     //   links = links.filter(item => item.id !== args.id);
     // }
-  }
-};
+
+}
+
 
 // 3
 const server = new GraphQLServer({
