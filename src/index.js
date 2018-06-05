@@ -5,6 +5,7 @@ const { Prisma } = require('prisma-binding');
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const AuthPayload = require('./resolvers/AuthPayload')
+const Subscription = require('./resolvers/Subscription')
 
 // 2
 const resolvers = {
@@ -12,7 +13,8 @@ const resolvers = {
     // getById: (roots, args, context, info) => links.find(item => item.id === args.id)
   
   Mutation,
-  AuthPayload
+  AuthPayload,
+  Subscription
     // updateLink: (roots, args) => {
     //   let result = 'Not valid id';
     //   links.forEach(item => {
